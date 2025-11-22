@@ -1,0 +1,96 @@
+---
+title: "Plan for Activity 14"
+author: "Ahalya Kudalugodaarachchi"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+
+## Plan for "Revising Armed Forces Code"
+### Goal: 
+To revise my armed force code according to the comments left on Activity 8 question 5
+It is also to create a table with a smaller sample size.
+      
+### Needs: 
+Nouns: Libraries: tidyverse, googlesheets4, gsheet, rvest, janitor, and knitr.
+        Variables: soldier_group_combo, soldier_group_uncount, soldier_group_combo_no_na
+                   (including the others from Activity 8)
+Verbs: filter(), grepl(), tabyl(), kable(), #|label:, #|tbl-cap:
+       
+### Steps: 
+1. Load libraries tidyverse, googlesheets4, gsheet, rvest, janitor, and knitr
+2. Change the variable names towards the end of the code chunk.
+   a. soldier_group_combo should be assigned to soldier_group_no_NA
+   b. Assign soldier_group_no_NA to the variable soldier_group_uncount
+3. To create the table
+   a. Assign soldier_group_uncount to the variable space_officers
+   b. Use filter() to filter out by "Space Force" and use grepl() to filter by "O" in pay grade
+   c. In a new code chunk, label the table "Space Force Commissioned Officers" by using #|tbl-cap
+   d. Use #|label: for "tbl-spaceForceOfficers"
+   e. Use tabyl(), dat = space_officers and the rows is Rank and the column is Gender
+   f. Pipe with kable()
+4. Include comments for each major step
+
+## Plan for the "Visualization for the Popularity of Baby Names"
+### Goal: 
+Create a visualization for the popularity of the selected baby names from Activity 13
+
+### Needs: 
+Nouns: Libraries: dcData, tidyverse, ggplot2
+         Variables: The same variables as written in Activity 13
+         
+Verbs: The same variables as written in Activity 13
+  
+### Steps:
+1. Copy and paste the code from Activity 13 relating from the Baby names question to the code chunk
+2. Add comments to describe what each major step does
+3. Include an explanation as to why I selected the names
+  
+## Plan for the "Plotting the Mathematical Function"
+### Goal: 
+Create a visualization for the Activity 4 Box Problem
+
+### Needs:
+Nouns: Libraries: ggplot2
+        Variables: Same variables as described and written in Activity 4 for the box problem
+        
+Verbs: The original function and x and y variables are the same as written in Activity 4.
+        ggplot(), stat_function(), labs()
+        
+### Steps: 
+1. Copy and paste the code from Activity 4 Box Problem to the code chunk
+3. Load library ggplot2
+2. Replace plot() with ggplot()
+   a. data = table_Volume
+   b. x = x_values, y = y_values
+   c. Add labs() for title and x and y axis labels
+   d. stat_function is fun = calculate_V
+   e. Add theme minimal
+
+
+## Code Appendix
+### Goal: 
+Create a code appendix at the end of the quarto document
+
+### Needs:
+Nouns: NA
+Verbs: {r, echo=TRUE, eval=FALSE, ref.label=knitr::all_labels()}
+
+### Steps:
+1. At the end of the document paste "{r, echo=TRUE, eval=FALSE, ref.label=knitr::all_labels()}"
+   to create the code appendix
+   
+## Linting
+### Goal: 
+After completing the above steps, lint the code
+
+### Needs: 
+Nouns: Library: lintr
+
+Verbs: lint()
+
+### Steps:
+1. Load library lintr
+2. Use lint() and "filename = [path to file]" to load the Markers tab
+3. Edit the code according to the flagged comments
+
