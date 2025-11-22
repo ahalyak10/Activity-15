@@ -39,7 +39,7 @@ colnames(google_group_clean) <- c(
   "Marine Corps:Male", "Marine Corps:Female",
   "Air Force:Male", "Air Force:Female",
   "Space Force:Male", "Space Force:Female"
-) 
+)
 
 # Changing table orientation to long table - Not one of the final tables
 google_group_long <- google_group_clean %>%
@@ -50,7 +50,7 @@ google_group_long <- google_group_clean %>%
     values_to = "Soldiers"
   )
 
-# Uploading the second link which contains the ranks associated with its respective pay grade and military branch
+# Uploading the second link which contains the ranks associated with its pay grade and military branch
 soldier_raw <- read_html("https://neilhatfield.github.io/Stat184_PayGradeRanks.html") %>%
   html_elements(css = "table") %>%
   html_table()
@@ -61,11 +61,11 @@ soldier_indiv_clean <- soldier_indiv_raw %>%
   slice(-c(1, 26)) %>%
   select(-c(1, 8)) %>%
   rename(
-    "Pay Grade" = `pay_grade`, 
+    "Pay Grade" = `pay_grade`,
     "Army" = `ranks_by_branch_of_service`,
-    "Navy" = `ranks_by_branch_of_service_2`, 
-    "Marine Corps" = `ranks_by_branch_of_service_3`, 
-    "Air Force" = `ranks_by_branch_of_service_4`, 
+    "Navy" = `ranks_by_branch_of_service_2`,
+    "Marine Corps" = `ranks_by_branch_of_service_3`,
+    "Air Force" = `ranks_by_branch_of_service_4`,
     "Space Force" = `ranks_by_branch_of_service_5`
   )
 
@@ -83,11 +83,13 @@ soldier_group_combo <- google_group_long %>%
   select(`Pay Grade`, `Service Branch`, Gender, Soldiers, Rank)
 
 # Removing missing data from dataset
-soldier_group_combo_no_NA <- subset(soldier_group_combo, Soldiers != "N/A*")
+soldier_group_combo_no_na <- subset(soldier_group_combo, Soldiers != "N/A*")
 
 # 2nd Dataset where each case is a person, using uncount function
-soldier_group_uncount <- soldier_group_combo_no_NA %>%
-  mutate(Soldiers = Soldiers %>% gsub(",", "", .) %>% as.numeric()) %>%
+soldier_group_uncount <- soldier_group_combo_no_na %>%
+  mutate(Soldiers = Soldiers %>%
+           gsub(",", "", .) %>%
+           as.numeric()) %>%
   tidyr::uncount(weights = Soldiers)
 
 # Table
@@ -118,20 +120,20 @@ library(tidyverse)
 data("BabyNames")
 
 # Assigning the table to a variable
-BabyNames_raw <- BabyNames
+baby_names_raw <- BabyNames
 
 # New variable has the data altered and rearranged so that only the selected names for all years will appear in the table, organized by name and chronological order
-BabyNames_sample <- BabyNames_raw %>%
+baby_names_sample <- baby_names_raw %>%
   filter(name %in% c("Helen", "Sadie", "Pearl", "Jeffery", "Theo", "Asher")) %>%
   arrange(name, year)
 
 # Table for the data
-sample_table <- BabyNames_sample %>%
-  semi_join(BabyNames_sample, by = c("name", "sex"))
+sample_table <- baby_names_sample %>%
+  semi_join(baby_names_sample, by = c("name", "sex"))
 
 # Make a line graph for the table, where color is the names and there are two graphs that are split by gender
-ggplot(BabyNames_sample, aes(x = year, y = count, group = name, 
-                             color = name,)) +
+ggplot(baby_names_sample, aes(x = year, y = count, group = name,
+                              color = name)) +
   facet_wrap(~ sex) +
   geom_line() +
   scale_y_continuous(labels = scales::comma) +
@@ -149,17 +151,17 @@ ggplot(BabyNames_sample, aes(x = year, y = count, group = name,
 library(ggplot2)
 
 # Calculate Volume
-calculate_V <- function(r) {
+calculate_v <- function(r) {
   length <- 11 - 2 * r
   width <- 8.5 - 2 * r
   height <- r
-  Volume <- length * width * height
-  return(Volume)
+  volume <- length * width * height
+  return(volume)
 }
 
-#Assign values to axises
+#Assign values to axis
 x_values <- seq(from = 0, to = 4.25, by = 0.01)
-y_values <- calculate_V(x_values)
+y_values <- calculate_v(x_values)
 
 # Make a table
 table_volume <- data.frame(x_values, y_values)
@@ -168,7 +170,7 @@ table_volume <- data.frame(x_values, y_values)
 ggplot(table_volume, aes(x = x_values, y = y_values, col = "pink")) +
   labs(title = "Square cutouts vs Volume", x = "square cutout length (in)",
        y = "Volume (in^3)") +
-  stat_function(fun = calculate_V) +
+  stat_function(fun = calculate_v) +
   theme_minimal()
 ```
 
