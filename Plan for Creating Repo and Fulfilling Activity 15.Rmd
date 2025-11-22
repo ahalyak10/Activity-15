@@ -1,0 +1,31 @@
+---
+title: "Plan for Activity 15 Repo"
+author: "Ahalya Kudalugodaarachchi"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+## Creating Repo
+### Goal:
+Create a public repo
+
+### Needs:
+Nouns: GitHub Desktop app
+Verbs: NA
+
+### Steps:
+1. Created a Repo with an appropriate title
+2. Created a branch called Requirements
+3. Copied Activity 14 from the original folder and pasted it into this folder
+4. Created a README.md file
+5. Create issues (at least 2)
+   a. #1 = Add a plan
+   b. #2 = Upload Activity 14 Final Quarto Document
+   c. #3 = Lint Activity 14
+6. Create commits (as each task is completed)
+   a. Editing the README
+   b. Creating a new R script file to lint Activity 14
+   c. Commiting the changes from Activity 14 to GitHub
+   d. Updating R History
+7. Creating pull requests
+   a. Each commit has to have an associating pull request to bring it to the main branch
